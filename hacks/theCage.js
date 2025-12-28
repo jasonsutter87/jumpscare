@@ -2,12 +2,31 @@
   if (localStorage.getItem('theCage_caged')) return;
   localStorage.setItem('theCage_caged', 'true');
 
-  // Nicolas Cage placeholder images
+  // Self-hosted base URL
+  const CHAOS_BASE = 'https://jasonsutter87.github.io/jumpscare';
+
+  // 20 glorious Nicolas Cage face swaps
   const cageImages = [
-    'https://www.placecage.com/200/200',
-    'https://www.placecage.com/c/200/200',
-    'https://www.placecage.com/g/200/200',
-    'https://www.placecage.com/gif/200/200'
+    CHAOS_BASE + '/lib/cage/cage1.jpg',   // Mona Lisa
+    CHAOS_BASE + '/lib/cage/cage2.jpg',   // Gandalf
+    CHAOS_BASE + '/lib/cage/cage3.jpg',   // Forrest Gump
+    CHAOS_BASE + '/lib/cage/cage4.jpg',   // Jack Sparrow
+    CHAOS_BASE + '/lib/cage/cage5.jpg',   // Obama
+    CHAOS_BASE + '/lib/cage/cage6.jpg',   // Kill Bill
+    CHAOS_BASE + '/lib/cage/cage7.jpg',   // Pulp Fiction
+    CHAOS_BASE + '/lib/cage/cage8.jpg',   // Titanic
+    CHAOS_BASE + '/lib/cage/cage9.jpg',   // Michael Scott
+    CHAOS_BASE + '/lib/cage/cage10.jpg',  // Leia
+    CHAOS_BASE + '/lib/cage/cage11.jpg',  // Buzz Lightyear
+    CHAOS_BASE + '/lib/cage/cage12.jpg',  // Ghostbusters
+    CHAOS_BASE + '/lib/cage/cage13.jpg',  // Avatar
+    CHAOS_BASE + '/lib/cage/cage14.jpg',  // Hermione
+    CHAOS_BASE + '/lib/cage/cage15.jpg',  // Mt Rushmore
+    CHAOS_BASE + '/lib/cage/cage16.jpg',  // Van Gogh
+    CHAOS_BASE + '/lib/cage/cage17.jpg',  // Star Trek
+    CHAOS_BASE + '/lib/cage/cage18.jpg',  // Johnny Cage
+    CHAOS_BASE + '/lib/cage/cage19.jpg',  // E.T.
+    CHAOS_BASE + '/lib/cage/cage20.jpg'   // Napoleon Dynamite
   ];
 
   // Show the jumpscare first
@@ -58,13 +77,12 @@
     const images = document.querySelectorAll('img:not([data-caged])');
     images.forEach((img, i) => {
       img.dataset.caged = 'true';
-      const width = img.width || 200;
-      const height = img.height || 200;
-      const cageType = ['', 'c/', 'g/', 'gif/'][i % 4];
       img.style.transition = 'opacity 0.5s';
       img.style.opacity = '0';
       setTimeout(() => {
-        img.src = `https://www.placecage.com/${cageType}${width}/${height}`;
+        // Pick a random Cage image
+        img.src = cageImages[Math.floor(Math.random() * cageImages.length)];
+        img.style.objectFit = 'cover';
         img.style.opacity = '1';
       }, 500);
     });
