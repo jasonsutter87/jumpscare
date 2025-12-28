@@ -101,6 +101,9 @@
 
     // Load clippy.js
     loadScript('https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/build/clippy.min.js', function() {
+      // CRITICAL: Override the dead S3 path with jsDelivr
+      clippy.BASE_PATH = 'https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/agents/';
+
       setTimeout(() => {
         const ov = document.getElementById('clippy-overlay');
         ov.style.transition = 'opacity 1s';
@@ -112,6 +115,7 @@
           // Load the REAL Clippy!
           clippy.load('Clippy', function(agent) {
             agent.show();
+            console.log('Clippy loaded successfully!');
 
             let adviceIndex = 0;
 
@@ -147,6 +151,8 @@
               const y = Math.random() * (window.innerHeight - 200) + 50;
               agent.moveTo(x, y);
             }, 30000 + Math.random() * 20000);
+          }, function(err) {
+            console.error('Failed to load Clippy:', err);
           });
         }, 1000);
       }, 2000);
