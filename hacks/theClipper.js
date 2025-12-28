@@ -2,7 +2,6 @@
   if (localStorage.getItem('theClipper_clipped')) return;
   localStorage.setItem('theClipper_clipped', 'true');
 
-  // Clippy ASCII art as base64 encoded image (using emoji for demo)
   const clippyAdvice = [
     "It looks like you're trying to work. Would you like me to distract you instead?",
     "I see you're clicking things. Have you tried clicking other things?",
@@ -26,6 +25,14 @@
     "It looks like you're ignoring me. That's okay. I'll just keep talking."
   ];
 
+  const clippyAnimations = [
+    'Wave', 'Greeting', 'GetAttention', 'Thinking', 'Explain',
+    'IdleRopePile', 'IdleAtom', 'IdleEyeBrowRaise', 'IdleSideToSide',
+    'IdleHeadScratch', 'IdleFingerTap', 'CheckingSomething', 'LookDown',
+    'LookLeft', 'LookRight', 'LookUp', 'Congratulate', 'Alert'
+  ];
+
+  // Show jumpscare overlay
   const overlay = document.createElement('div');
   overlay.innerHTML = `
     <style>
@@ -73,192 +80,83 @@
   `;
   document.body.appendChild(overlay);
 
-  setTimeout(() => {
-    const ov = document.getElementById('clippy-overlay');
-    ov.style.transition = 'opacity 1s';
-    ov.style.opacity = '0';
+  // Load jQuery if not present (required for clippy.js)
+  function loadScript(src, callback) {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = callback;
+    document.head.appendChild(script);
+  }
 
-    setTimeout(() => {
-      ov.remove();
+  function loadCSS(href) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
 
-      // Create Clippy container
-      const clippy = document.createElement('div');
-      clippy.innerHTML = `
-        <style>
-          #clippy-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999999;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-          }
-          #clippy-character {
-            width: 100px;
-            height: 120px;
-            background: linear-gradient(180deg, #c0c0c0 0%, #a0a0a0 100%);
-            border-radius: 50% 50% 45% 45%;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-            animation: clippyIdle 2s ease-in-out infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 50px;
-          }
-          #clippy-character::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: #c0c0c0;
-            border-radius: 50%;
-          }
-          #clippy-eyes {
-            position: absolute;
-            top: 15px;
-            display: flex;
-            gap: 15px;
-          }
-          .clippy-eye {
-            width: 20px;
-            height: 25px;
-            background: #fff;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-          }
-          .clippy-pupil {
-            width: 10px;
-            height: 10px;
-            background: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 8px;
-            left: 5px;
-            animation: lookAround 3s ease-in-out infinite;
-          }
-          #clippy-speech {
-            position: absolute;
-            bottom: 130px;
-            right: 0;
-            background: #ffffd5;
-            border: 2px solid #000;
-            border-radius: 10px;
-            padding: 15px;
-            max-width: 250px;
-            font-size: 14px;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-            display: none;
-          }
-          #clippy-speech::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: 30px;
-            border: 8px solid transparent;
-            border-top-color: #ffffd5;
-          }
-          #clippy-speech::before {
-            content: '';
-            position: absolute;
-            bottom: -18px;
-            right: 28px;
-            border: 10px solid transparent;
-            border-top-color: #000;
-          }
-          #clippy-speech.show {
-            display: block;
-            animation: popIn 0.3s ease;
-          }
-          #clippy-dismiss {
-            position: absolute;
-            top: 5px;
-            right: 8px;
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            color: #666;
-          }
-          @keyframes clippyIdle {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            25% { transform: translateY(-5px) rotate(-2deg); }
-            75% { transform: translateY(-5px) rotate(2deg); }
-          }
-          @keyframes lookAround {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(5px, -2px); }
-            50% { transform: translate(-3px, 2px); }
-            75% { transform: translate(2px, 3px); }
-          }
-          @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-        </style>
-        <div id="clippy-container">
-          <div id="clippy-speech">
-            <button id="clippy-dismiss">x</button>
-            <span id="clippy-message"></span>
-          </div>
-          <div id="clippy-character">
-            <div id="clippy-eyes">
-              <div class="clippy-eye"><div class="clippy-pupil"></div></div>
-              <div class="clippy-eye"><div class="clippy-pupil"></div></div>
-            </div>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(clippy);
+  function initClipper() {
+    // Load clippy.js CSS
+    loadCSS('https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/build/clippy.css');
 
-      const speech = document.getElementById('clippy-speech');
-      const message = document.getElementById('clippy-message');
-      const character = document.getElementById('clippy-character');
-      const dismiss = document.getElementById('clippy-dismiss');
+    // Load clippy.js
+    loadScript('https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/build/clippy.min.js', function() {
+      setTimeout(() => {
+        const ov = document.getElementById('clippy-overlay');
+        ov.style.transition = 'opacity 1s';
+        ov.style.opacity = '0';
 
-      let adviceIndex = 0;
+        setTimeout(() => {
+          ov.remove();
 
-      function showAdvice() {
-        message.textContent = clippyAdvice[adviceIndex];
-        speech.classList.add('show');
-        adviceIndex = (adviceIndex + 1) % clippyAdvice.length;
-      }
+          // Load the REAL Clippy!
+          clippy.load('Clippy', function(agent) {
+            agent.show();
 
-      function hideAdvice() {
-        speech.classList.remove('show');
-      }
+            let adviceIndex = 0;
 
-      // Show first advice after a delay
-      setTimeout(showAdvice, 2000);
+            function showRandomAdvice() {
+              const randomAnim = clippyAnimations[Math.floor(Math.random() * clippyAnimations.length)];
+              agent.play(randomAnim);
+              agent.speak(clippyAdvice[adviceIndex]);
+              adviceIndex = (adviceIndex + 1) % clippyAdvice.length;
+            }
 
-      // Random advice popups
-      setInterval(() => {
-        if (!speech.classList.contains('show')) {
-          showAdvice();
-        }
-      }, 15000 + Math.random() * 10000);
+            // Initial greeting
+            setTimeout(() => {
+              agent.play('Wave');
+              agent.speak(clippyAdvice[0]);
+              adviceIndex = 1;
+            }, 1000);
 
-      // Click to get new advice
-      character.addEventListener('click', () => {
-        showAdvice();
-      });
+            // Random advice every 15-25 seconds
+            setInterval(() => {
+              showRandomAdvice();
+            }, 15000 + Math.random() * 10000);
 
-      // Dismiss button
-      dismiss.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hideAdvice();
-      });
+            // Random idle animations
+            setInterval(() => {
+              const idleAnims = ['IdleRopePile', 'IdleAtom', 'IdleEyeBrowRaise', 'IdleSideToSide', 'IdleFingerTap', 'Thinking'];
+              const randomIdle = idleAnims[Math.floor(Math.random() * idleAnims.length)];
+              agent.play(randomIdle);
+            }, 8000 + Math.random() * 5000);
 
-      // Auto-hide after 8 seconds
-      setInterval(() => {
-        if (speech.classList.contains('show')) {
-          setTimeout(hideAdvice, 8000);
-        }
-      }, 1000);
-    }, 1000);
-  }, 2500);
+            // Make him move around occasionally
+            setInterval(() => {
+              const x = Math.random() * (window.innerWidth - 200) + 50;
+              const y = Math.random() * (window.innerHeight - 200) + 50;
+              agent.moveTo(x, y);
+            }, 30000 + Math.random() * 20000);
+          });
+        }, 1000);
+      }, 2000);
+    });
+  }
+
+  // Check if jQuery is loaded, load it if not
+  if (typeof jQuery === 'undefined') {
+    loadScript('https://code.jquery.com/jquery-3.6.0.min.js', initClipper);
+  } else {
+    initClipper();
+  }
 })();
