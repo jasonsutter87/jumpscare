@@ -1,6 +1,6 @@
 # chaos.js
 
-**10 harmless office pranks for maximum chaos.**
+**11 harmless office pranks for maximum chaos.**
 
 Drop a single `<script>` tag into any webpage and watch your coworkers question reality. Each prank triggers once per victim (uses localStorage), so refreshing won't save them.
 
@@ -24,6 +24,7 @@ Drop a single `<script>` tag into any webpage and watch your coworkers question 
 | **theClipper** | Clippy returns with the original animations. Dispenses unsolicited, unhelpful advice. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/clipper.html) |
 | **theDVD** | The classic DVD screensaver logo bounces around. Corner hit counter included. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/dvd.html) |
 | **theVoid** | Screen slowly fades to black like a dying monitor. "If you stare into the void..." | [Demo](https://jasonsutter87.github.io/jumpscare/demos/void.html) |
+| **theRickroll** | No warning. No splash. 10 seconds of false security, then... never gonna give you up. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/rickroll.html) |
 
 ---
 
@@ -43,6 +44,7 @@ Add one of these to any page's `<head>`:
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/theClipper.js"></script>
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/theDVD.js"></script>
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/theVoid.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/theRickroll.js"></script>
 ```
 
 Each hack:
@@ -68,11 +70,12 @@ localStorage.removeItem('theSwap_swapped');
 localStorage.removeItem('theClipper_clipped');
 localStorage.removeItem('theDVD_bounced');
 localStorage.removeItem('theVoid_voided');
+localStorage.removeItem('theRickroll_rolled');
 
 // Or reset all at once
 ['theSans_spooked', 'theCage_caged', 'theDrift_drifted', 'theGravity_fallen',
  'theBlur_blurred', 'theRotate_rotated', 'theSwap_swapped', 'theClipper_clipped',
- 'theDVD_bounced', 'theVoid_voided'].forEach(k => localStorage.removeItem(k));
+ 'theDVD_bounced', 'theVoid_voided', 'theRickroll_rolled'].forEach(k => localStorage.removeItem(k));
 ```
 
 ---
@@ -108,7 +111,8 @@ jumpscare/
 │   ├── theSwap.js
 │   ├── theClipper.js
 │   ├── theDVD.js
-│   └── theVoid.js
+│   ├── theVoid.js
+│   └── theRickroll.js
 ├── demos/              # Individual demo pages
 │   ├── sans.html
 │   ├── cage.html

@@ -191,7 +191,7 @@
 <body>
   <div class="hero">
     <div class="logo">chaos.js</div>
-    <p class="tagline">10 harmless office pranks for <span>maximum chaos</span></p>
+    <p class="tagline">11 harmless office pranks for <span>maximum chaos</span></p>
     <div class="warning">Use responsibly. Your coworkers will never trust you again.</div>
   </div>
 
@@ -265,6 +265,13 @@
       <p class="hack-desc">The screen slowly fades to black like a dying monitor. "If you stare into the void..."</p>
       <a href="demos/void.html" class="hack-link">Demo</a>
     </div>
+
+    <div class="hack-card" style="--accent: #ff4500; --accent-rgb: 255, 69, 0;">
+      <div class="hack-icon">&#x1F3B5;</div>
+      <div class="hack-name">theRickroll</div>
+      <p class="hack-desc">No warning. No splash. 10 seconds of false security, then... you know exactly what happens.</p>
+      <a href="demos/rickroll.html" class="hack-link">Demo</a>
+    </div>
   </div>
 
   <div class="usage">
@@ -280,8 +287,9 @@
       <span class="comment">&lt;!-- /hacks/theRotate.js  - Slow rotation --&gt;</span><br>
       <span class="comment">&lt;!-- /hacks/theSwap.js    - Word replacement --&gt;</span><br>
       <span class="comment">&lt;!-- /hacks/theClipper.js - Clippy returns --&gt;</span><br>
-      <span class="comment">&lt;!-- /hacks/theDVD.js     - DVD screensaver --&gt;</span><br>
-      <span class="comment">&lt;!-- /hacks/theVoid.js    - Fade to black --&gt;</span>
+      <span class="comment">&lt;!-- /hacks/theDVD.js      - DVD screensaver --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theVoid.js     - Fade to black --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theRickroll.js - Never gonna give you up --&gt;</span>
     </div>
     <button class="reset-all" onclick="resetAll()">Reset All Demos</button>
   </div>
@@ -296,7 +304,8 @@
       const keys = [
         'theSans_spooked', 'theCage_caged', 'theDrift_drifted',
         'theGravity_fallen', 'theBlur_blurred', 'theRotate_rotated',
-        'theSwap_swapped', 'theClipper_clipped', 'theDVD_bounced', 'theVoid_voided'
+        'theSwap_swapped', 'theClipper_clipped', 'theDVD_bounced',
+        'theVoid_voided', 'theRickroll_rolled'
       ];
       keys.forEach(key => localStorage.removeItem(key));
       alert('All demos reset! Ready for more chaos.');
