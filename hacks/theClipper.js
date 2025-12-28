@@ -95,14 +95,17 @@
     document.head.appendChild(link);
   }
 
-  function initClipper() {
-    // Load clippy.js CSS
-    loadCSS('https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/build/clippy.css');
+  // Self-hosted base URL (change this if hosting elsewhere)
+  const CHAOS_BASE = 'https://jasonsutter87.github.io/jumpscare';
 
-    // Load clippy.js
-    loadScript('https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/build/clippy.min.js', function() {
-      // CRITICAL: Override the dead S3 path with jsDelivr
-      clippy.BASE_PATH = 'https://cdn.jsdelivr.net/gh/smore-inc/clippy.js@master/agents/';
+  function initClipper() {
+    // Load clippy.js CSS (self-hosted)
+    loadCSS(CHAOS_BASE + '/lib/clippy/clippy.css');
+
+    // Load clippy.js (self-hosted)
+    loadScript(CHAOS_BASE + '/lib/clippy/clippy.min.js', function() {
+      // Point to our self-hosted agent files
+      clippy.BASE_PATH = CHAOS_BASE + '/lib/clippy/agents/';
 
       setTimeout(() => {
         const ov = document.getElementById('clippy-overlay');
