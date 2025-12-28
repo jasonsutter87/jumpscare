@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Announcements</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding: 40px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 { color: #333; margin-bottom: 30px; }
+    .announcement {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .announcement h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    .announcement p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .announcement .meta {
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #667eea;
+      color: #fff;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-right: 5px;
+    }
+    .tag.urgent { background: #ef4444; }
+    .reset-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Company Announcements</h1>
+
+    <div class="announcement">
+      <h3>Important: Upcoming Team Sync</h3>
+      <p>Please join us for an urgent all-hands meeting this Friday. We'll be discussing our roadmap and how to better align our deliverables with stakeholder expectations.</p>
+      <p>This is a proactive measure to optimize our workflow and leverage synergy across teams.</p>
+      <div class="meta">
+        <span class="tag urgent">Urgent</span>
+        <span class="tag">Important</span>
+        Posted by: Manager | Deadline: Friday
+      </div>
+    </div>
+
+    <div class="announcement">
+      <h3>New Scalable Infrastructure</h3>
+      <p>The team has been working to optimize our robust backend systems. This will help us pivot quickly and circle back on any issues ASAP.</p>
+      <p>Please sync with your manager if you have bandwidth to assist.</p>
+      <div class="meta">
+        <span class="tag">Important</span>
+        Posted by: Tech Team | Deadline: Next Sprint
+      </div>
+    </div>
+
+    <div class="announcement">
+      <h3>Quarterly Stakeholder Meeting</h3>
+      <p>Our proactive approach to deliverables has impressed our stakeholders. Let's continue to leverage our synergy and align on the roadmap.</p>
+      <div class="meta">
+        <span class="tag">Meeting</span>
+        Posted by: Manager
+      </div>
+    </div>
+  </div>
+  <span class="reset-link" onclick="localStorage.removeItem('theSwap_swapped'); location.reload();">Reset demo</span>
+  <script src="../hacks/theSwap.js"></script>
+</body>
+</html>

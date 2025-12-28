@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 { color: #333; margin-bottom: 25px; font-size: 1.5rem; }
+    .task {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .task input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 15px;
+    }
+    .task span { flex: 1; color: #333; }
+    .task .due {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .task .due.urgent { color: #ef4444; }
+    .add-task {
+      display: flex;
+      margin-top: 20px;
+    }
+    .add-task input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px 0 0 8px;
+      font-size: 1rem;
+    }
+    .add-task button {
+      padding: 12px 20px;
+      background: #667eea;
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+    }
+    .reset-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Today's Tasks</h1>
+    <div class="task">
+      <input type="checkbox">
+      <span>Review pull request #234</span>
+      <span class="due urgent">Due: Today</span>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <span>Update documentation</span>
+      <span class="due">Due: Tomorrow</span>
+    </div>
+    <div class="task">
+      <input type="checkbox" checked>
+      <span style="text-decoration: line-through; color: #888;">Fix login bug</span>
+      <span class="due">Completed</span>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <span>Prepare sprint demo</span>
+      <span class="due">Due: Friday</span>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <span>Team standup meeting</span>
+      <span class="due urgent">Due: 10:00 AM</span>
+    </div>
+    <div class="add-task">
+      <input type="text" placeholder="Add a new task...">
+      <button>Add</button>
+    </div>
+    <span class="reset-link" onclick="localStorage.removeItem('theRotate_rotated'); location.reload();">Reset demo</span>
+  </div>
+  <script src="../hacks/theRotate.js"></script>
+</body>
+</html>

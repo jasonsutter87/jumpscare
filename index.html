@@ -3,113 +3,304 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Totally Normal Website</title>
+  <title>chaos.js - Harmless Office Pranks</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #0a0a0a;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: #fff;
     }
 
-    .container {
-      background: white;
-      padding: 40px 60px;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    .hero {
       text-align: center;
-      max-width: 500px;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      border-bottom: 1px solid #222;
     }
 
-    h1 {
-      color: #333;
-      margin-bottom: 10px;
-      font-size: 2rem;
+    .logo {
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00ff88, #00d4ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      animation: glitch 3s infinite;
     }
 
-    .subtitle {
-      color: #666;
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, -1px); }
+      98% { transform: translate(1px, 1px); }
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #888;
       margin-bottom: 30px;
-      font-size: 1rem;
     }
 
-    .btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 15px 40px;
-      font-size: 1.1rem;
-      border-radius: 30px;
-      cursor: pointer;
+    .tagline span {
+      color: #00ff88;
+    }
+
+    .warning {
+      display: inline-block;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid #ff0000;
+      color: #ff6666;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .hacks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 60px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hack-card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid #333;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hack-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .hack-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .hack-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .hack-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .hack-desc {
+      color: #888;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .hack-link {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    .hack-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(var(--accent-rgb), 0.4);
     }
 
-    .features {
-      margin-top: 30px;
+    .usage {
+      background: #111;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .usage h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .code-block {
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 700px;
+      margin: 0 auto;
       text-align: left;
+      font-family: 'Courier New', monospace;
+      border: 1px solid #333;
     }
 
-    .features li {
-      color: #555;
-      margin: 10px 0;
-      list-style: none;
+    .code-block .comment { color: #666; }
+    .code-block .tag { color: #ff79c6; }
+    .code-block .attr { color: #50fa7b; }
+    .code-block .string { color: #f1fa8c; }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #444;
+      font-size: 0.9rem;
     }
 
-    .features li::before {
-      content: "✓ ";
-      color: #667eea;
-      font-weight: bold;
+    footer a {
+      color: #00ff88;
+      text-decoration: none;
     }
 
-    .reset-link {
-      display: block;
-      margin-top: 30px;
-      color: #999;
-      font-size: 0.8rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .reset-link:hover {
+    .reset-all {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #222;
       color: #666;
+      border: 1px solid #333;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .reset-all:hover {
+      background: #333;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to ProductivityPro</h1>
-    <p class="subtitle">The #1 app for getting things done!</p>
-
-    <button class="btn" onclick="alert('Feature coming soon!')">
-      Start Free Trial
-    </button>
-
-    <ul class="features">
-      <li>Boost your workflow by 300%</li>
-      <li>AI-powered task management</li>
-      <li>Seamless team collaboration</li>
-      <li>Definitely not a prank</li>
-    </ul>
-
-    <span class="reset-link" onclick="localStorage.removeItem('theSans_spooked'); location.reload();">
-      Reset demo (for testing)
-    </span>
+  <div class="hero">
+    <div class="logo">chaos.js</div>
+    <p class="tagline">10 harmless office pranks for <span>maximum chaos</span></p>
+    <div class="warning">Use responsibly. Your coworkers will never trust you again.</div>
   </div>
 
-  <!-- THE CHAOS LURKS BELOW -->
-  <script src="theSans.js"></script>
+  <div class="hacks-grid">
+    <div class="hack-card" style="--accent: #00ff00; --accent-rgb: 0, 255, 0;">
+      <div class="hack-icon">&#x1F4CE;</div>
+      <div class="hack-name">theSans</div>
+      <p class="hack-desc">The original. A terrifying "hacked" jumpscare followed by the true horror: Comic Sans everywhere. Forever.</p>
+      <a href="demos/sans.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #ffd700; --accent-rgb: 255, 215, 0;">
+      <div class="hack-icon">&#x1F3AD;</div>
+      <div class="hack-name">theCage</div>
+      <p class="hack-desc">All images slowly transform into Nicolas Cage. Every. Single. One. The cage is inescapable.</p>
+      <a href="demos/cage.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #e94560; --accent-rgb: 233, 69, 96;">
+      <div class="hack-icon">&#x1F378;</div>
+      <div class="hack-name">theDrift</div>
+      <p class="hack-desc">The cursor has had a few too many. It drifts, wobbles, and makes clicking anything an adventure.</p>
+      <a href="demos/drift.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #8b0000; --accent-rgb: 139, 0, 0;">
+      <div class="hack-icon">&#x1F34E;</div>
+      <div class="hack-name">theGravity</div>
+      <p class="hack-desc">Newton's revenge. Page elements slowly fall to the bottom of the screen with realistic physics.</p>
+      <a href="demos/gravity.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #888888; --accent-rgb: 136, 136, 136;">
+      <div class="hack-icon">&#x1F453;</div>
+      <div class="hack-name">theBlur</div>
+      <p class="hack-desc">The page progressively gets blurrier over 10 minutes. Comes with a helpful eye test chart.</p>
+      <a href="demos/blur.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #00d4ff; --accent-rgb: 0, 212, 255;">
+      <div class="hack-icon">&#x1F300;</div>
+      <div class="hack-name">theRotate</div>
+      <p class="hack-desc">The entire page slowly rotates. 0.1 degree at a time. Subtle enough to question your sanity.</p>
+      <a href="demos/rotate.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #00ff00; --accent-rgb: 0, 255, 0;">
+      <div class="hack-icon">&#x1F4DD;</div>
+      <div class="hack-name">theSwap</div>
+      <p class="hack-desc">Corporate buzzword translator. "Meeting" becomes "seance", "deadline" becomes "day of reckoning".</p>
+      <a href="demos/swap.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #0078d4; --accent-rgb: 0, 120, 212;">
+      <div class="hack-icon">&#x1F4CE;</div>
+      <div class="hack-name">theClipper</div>
+      <p class="hack-desc">He's back. Clippy returns with unsolicited, unhelpful advice. Your first AI friend, now your nemesis.</p>
+      <a href="demos/clipper.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #9400d3; --accent-rgb: 148, 0, 211;">
+      <div class="hack-icon">&#x1F4C0;</div>
+      <div class="hack-name">theDVD</div>
+      <p class="hack-desc">The classic DVD screensaver logo bounces around. Corner hit counter included. Productivity: destroyed.</p>
+      <a href="demos/dvd.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #1a1a1a; --accent-rgb: 26, 26, 26;">
+      <div class="hack-icon">&#x1F573;&#xFE0F;</div>
+      <div class="hack-name">theVoid</div>
+      <p class="hack-desc">The screen slowly fades to black like a dying monitor. "If you stare into the void..."</p>
+      <a href="demos/void.html" class="hack-link">Demo</a>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h2>How to Deploy Chaos</h2>
+    <div class="code-block">
+      <span class="comment">&lt;!-- Add to any page's &lt;head&gt; --&gt;</span><br><br>
+      <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://jasonsutter87.github.io/jumpscare/hacks/theSans.js"</span><span class="tag">&gt;&lt;/script&gt;</span><br><br>
+      <span class="comment">&lt;!-- Or pick your poison: --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theCage.js    - Nicolas Cage images --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theDrift.js   - Drunk cursor --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theGravity.js - Falling elements --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theBlur.js    - Progressive blur --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theRotate.js  - Slow rotation --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theSwap.js    - Word replacement --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theClipper.js - Clippy returns --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theDVD.js     - DVD screensaver --&gt;</span><br>
+      <span class="comment">&lt;!-- /hacks/theVoid.js    - Fade to black --&gt;</span>
+    </div>
+    <button class="reset-all" onclick="resetAll()">Reset All Demos</button>
+  </div>
+
+  <footer>
+    <p>Made with chaos by <a href="https://github.com/jasonsutter87">@jasonsutter87</a></p>
+    <p style="margin-top: 10px;">No coworkers were permanently harmed in the making of these pranks.</p>
+  </footer>
+
+  <script>
+    function resetAll() {
+      const keys = [
+        'theSans_spooked', 'theCage_caged', 'theDrift_drifted',
+        'theGravity_fallen', 'theBlur_blurred', 'theRotate_rotated',
+        'theSwap_swapped', 'theClipper_clipped', 'theDVD_bounced', 'theVoid_voided'
+      ];
+      keys.forEach(key => localStorage.removeItem(key));
+      alert('All demos reset! Ready for more chaos.');
+    }
+  </script>
 </body>
 </html>

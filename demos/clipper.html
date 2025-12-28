@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Composer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #e8eef7;
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .email-container {
+      background: #fff;
+      width: 100%;
+      max-width: 700px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .toolbar {
+      background: #0078d4;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      gap: 15px;
+    }
+    .toolbar button {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .toolbar button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .email-form {
+      padding: 20px;
+    }
+    .field {
+      margin-bottom: 15px;
+    }
+    .field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .field input, .field textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .field textarea {
+      height: 250px;
+      resize: vertical;
+    }
+    .send-btn {
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .reset-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="toolbar">
+      <button>New</button>
+      <button>Reply</button>
+      <button>Forward</button>
+      <button>Attach</button>
+    </div>
+    <div class="email-form">
+      <div class="field">
+        <label>To:</label>
+        <input type="email" value="team@company.com">
+      </div>
+      <div class="field">
+        <label>Subject:</label>
+        <input type="text" value="Re: Project Update">
+      </div>
+      <div class="field">
+        <label>Message:</label>
+        <textarea>Hi Team,
+
+I wanted to follow up on our discussion from yesterday's meeting. Here are the key action items:
+
+1. Review the updated requirements document
+2. Complete the sprint planning by Friday
+3. Schedule a sync with the design team
+
+Let me know if you have any questions.
+
+Best regards</textarea>
+      </div>
+      <button class="send-btn">Send</button>
+    </div>
+    <span class="reset-link" onclick="localStorage.removeItem('theClipper_clipped'); location.reload();">Reset demo</span>
+  </div>
+  <script src="../hacks/theClipper.js"></script>
+</body>
+</html>

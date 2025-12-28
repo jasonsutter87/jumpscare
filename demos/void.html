@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #1a1a2e;
+      min-height: 100vh;
+      padding: 30px;
+      color: #fff;
+    }
+    h1 { margin-bottom: 30px; font-weight: 400; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #16213e;
+      padding: 25px;
+      border-radius: 12px;
+    }
+    .card h3 {
+      color: #888;
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+    .card .value {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .card .change {
+      font-size: 0.9rem;
+    }
+    .card .change.up { color: #10b981; }
+    .card .change.down { color: #ef4444; }
+    .chart {
+      height: 150px;
+      background: linear-gradient(to top, rgba(102, 126, 234, 0.2), transparent);
+      border-radius: 8px;
+      margin-top: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chart::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #667eea;
+    }
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 120px;
+      margin-top: 15px;
+    }
+    .bar {
+      flex: 1;
+      background: linear-gradient(to top, #667eea, #764ba2);
+      border-radius: 4px 4px 0 0;
+    }
+    .reset-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Real-Time Analytics</h1>
+  <div class="grid">
+    <div class="card">
+      <h3>TOTAL VISITORS</h3>
+      <div class="value">284,729</div>
+      <div class="change up">+12.5% from last month</div>
+      <div class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>CONVERSION RATE</h3>
+      <div class="value">3.24%</div>
+      <div class="change up">+0.8% from last week</div>
+      <div class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>REVENUE</h3>
+      <div class="value">$127.4k</div>
+      <div class="change down">-2.1% from last month</div>
+      <div class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>ACTIVE SESSIONS</h3>
+      <div class="value">1,847</div>
+      <div class="change up">Live now</div>
+      <div class="bar-chart">
+        <div class="bar" style="height: 60%"></div>
+        <div class="bar" style="height: 80%"></div>
+        <div class="bar" style="height: 45%"></div>
+        <div class="bar" style="height: 90%"></div>
+        <div class="bar" style="height: 70%"></div>
+        <div class="bar" style="height: 55%"></div>
+        <div class="bar" style="height: 85%"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>BOUNCE RATE</h3>
+      <div class="value">42.8%</div>
+      <div class="change down">+5.2% from average</div>
+      <div class="chart"></div>
+    </div>
+    <div class="card">
+      <h3>AVG SESSION DURATION</h3>
+      <div class="value">4m 32s</div>
+      <div class="change up">+18s from last week</div>
+      <div class="chart"></div>
+    </div>
+  </div>
+  <span class="reset-link" onclick="localStorage.removeItem('theVoid_voided'); location.reload();">Reset demo</span>
+  <script src="../hacks/theVoid.js"></script>
+</body>
+</html>
