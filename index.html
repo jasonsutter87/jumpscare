@@ -193,7 +193,7 @@
 <body>
   <div class="hero">
     <div class="logo">chaos.js</div>
-    <p class="tagline">27 harmless office pranks for <span>maximum chaos</span></p>
+    <p class="tagline">32 harmless office pranks for <span>maximum chaos</span></p>
     <div class="warning">Use responsibly. Your coworkers will never trust you again.</div>
   </div>
 
@@ -213,10 +213,10 @@
       <a href="demos/cage.html" class="hack-link">Demo</a>
     </div>
 
-    <div class="hack-card" style="--accent: #e94560; --accent-rgb: 233, 69, 96;">
-      <div class="hack-icon">&#x1F378;</div>
+    <div class="hack-card" style="--accent: #ff6b35; --accent-rgb: 255, 107, 53;">
+      <div class="hack-icon">&#x1F3CE;&#xFE0F;</div>
       <div class="hack-name">theDrift</div>
-      <p class="hack-desc">The cursor has had a few too many. It drifts, wobbles, and makes clicking anything an adventure.</p>
+      <p class="hack-desc">Tokyo Drift mode activated. Drive a car around the page with WASD. Leave tire marks everywhere. Maximum skid.</p>
       <a href="demos/drift.html" class="hack-link">Demo</a>
     </div>
 
@@ -388,6 +388,41 @@
       <p class="hack-desc">Snowflakes fall across the screen. Frost edges appear. Winter is coming... to your browser.</p>
       <a href="demos/snow.html" class="hack-link">Demo</a>
     </div>
+
+    <div class="hack-card" style="--accent: #ff6b6b; --accent-rgb: 255, 107, 107;">
+      <div class="hack-icon">&#x23F3;</div>
+      <div class="hack-name">theDelay</div>
+      <p class="hack-desc">Connection issues detected. Every click is delayed 200-800ms. Fake ping meter included. Patience is a virtue.</p>
+      <a href="demos/delay.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #ff4500; --accent-rgb: 255, 69, 0;">
+      <div class="hack-icon">&#x1F525;</div>
+      <div class="hack-name">theTrail</div>
+      <p class="hack-desc">Your cursor is on fire. Literally. A blazing trail of flames follows your mouse everywhere it goes.</p>
+      <a href="demos/trail.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #00ff00; --accent-rgb: 0, 255, 0;">
+      <div class="hack-icon">&#x1F40D;</div>
+      <div class="hack-name">theSnake</div>
+      <p class="hack-desc">Classic Snake, but it eats page elements. Collect apples to restore them. Don't hit yourself!</p>
+      <a href="demos/snake.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #00ff00; --accent-rgb: 0, 255, 0;">
+      <div class="hack-icon">&#x1F47E;</div>
+      <div class="hack-name">theInvaders</div>
+      <p class="hack-desc">Space Invaders attack your webpage! Shoot them down before they abduct your content. Pew pew!</p>
+      <a href="demos/invaders.html" class="hack-link">Demo</a>
+    </div>
+
+    <div class="hack-card" style="--accent: #ffffff; --accent-rgb: 255, 255, 255;">
+      <div class="hack-icon">&#x1F3D3;</div>
+      <div class="hack-name">thePong</div>
+      <p class="hack-desc">Pong ball bounces around scrambling everything it hits. Rotate, skew, color shift. Pure chaos.</p>
+      <a href="demos/pong.html" class="hack-link">Demo</a>
+    </div>
   </div>
 
   <div class="usage">
@@ -401,7 +436,8 @@
       <span class="comment">&lt;!-- theRickroll, theFlip, theEarthquake, theCrash --&gt;</span><br>
       <span class="comment">&lt;!-- theUpdate, theColoring, theMatrix, theNyan --&gt;</span><br>
       <span class="comment">&lt;!-- theUwU, theConfetti, theZoom, theCursor --&gt;</span><br>
-      <span class="comment">&lt;!-- theDoge, theAds, the3D, theSound, theSnow --&gt;</span>
+      <span class="comment">&lt;!-- theDoge, theAds, the3D, theSound, theSnow --&gt;</span><br>
+      <span class="comment">&lt;!-- theDelay, theTrail, theSnake, theInvaders, thePong --&gt;</span>
     </div>
     <button class="reset-all" onclick="resetAll()">Reset All Demos</button>
   </div>
@@ -422,7 +458,9 @@
         'theColoring_colored', 'theMatrix_unplugged', 'theNyan_nyaned',
         'theUwU_uwued', 'theConfetti_partied', 'theZoom_zoomed',
         'theCursor_cursed', 'theDoge_wowed', 'theAds_advertised',
-        'the3D_tilted', 'theSound_noisy', 'theSnow_frozen'
+        'the3D_tilted', 'theSound_noisy', 'theSnow_frozen',
+        'theDelay_lagged', 'theTrail_blazed', 'theSnake_eaten',
+        'theInvaders_invaded', 'thePong_ponged'
       ];
       keys.forEach(key => localStorage.removeItem(key));
       alert('All demos reset! Ready for more chaos.');
