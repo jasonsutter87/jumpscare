@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Fast Website</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      padding: 40px 60px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+      max-width: 500px;
+    }
+    h1 { color: #333; margin-bottom: 10px; font-size: 2rem; }
+    .subtitle { color: #666; margin-bottom: 30px; }
+    .btn {
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .reset-link {
+      display: block;
+      margin-top: 30px;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SpeedyClick Pro</h1>
+    <p class="subtitle">The fastest clicking experience!</p>
+
+    <button class="btn" onclick="alert('Clicked!')">Click Me Fast!</button>
+    <button class="btn" onclick="alert('Also clicked!')">No Lag Here!</button>
+
+    <p style="margin-top: 20px; color: #666;">Try clicking the buttons above...</p>
+
+    <span class="reset-link" onclick="localStorage.removeItem('theDelay_lagged'); location.reload();">
+      Reset demo (for testing)
+    </span>
+  </div>
+
+  <script src="../hacks/theDelay.js"></script>
+</body>
+</html>

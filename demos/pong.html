@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structured Layout Page</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      padding: 40px;
+      color: #fff;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+    h1 { font-size: 2rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .box {
+      background: linear-gradient(135deg, #333, #222);
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .box:nth-child(odd) { background: linear-gradient(135deg, #2a4365, #1a365d); }
+    .box:nth-child(even) { background: linear-gradient(135deg, #553c9a, #44337a); }
+    .reset-link {
+      display: block;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Carefully Arranged Elements</h1>
+    <p style="color: #888; margin-top: 10px;">Everything is perfectly aligned... for now.</p>
+  </div>
+
+  <div class="grid">
+    <div class="box">Block A</div>
+    <div class="box">Block B</div>
+    <div class="box">Block C</div>
+    <div class="box">Block D</div>
+    <div class="box">Block E</div>
+    <div class="box">Block F</div>
+    <div class="box">Block G</div>
+    <div class="box">Block H</div>
+    <div class="box">Block I</div>
+    <div class="box">Block J</div>
+    <div class="box">Block K</div>
+    <div class="box">Block L</div>
+  </div>
+
+  <span class="reset-link" onclick="localStorage.removeItem('thePong_ponged'); location.reload();">
+    Reset demo (for testing)
+  </span>
+
+  <script src="../hacks/thePong.js"></script>
+</body>
+</html>

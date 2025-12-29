@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content-Rich Website</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a2e;
+      min-height: 100vh;
+      padding: 40px;
+      color: #fff;
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .subtitle { color: #888; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #16213e;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .card h3 { margin-bottom: 10px; color: #00ff00; }
+    .card p { color: #888; font-size: 0.9rem; }
+    .reset-link {
+      display: block;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>DataVault Pro</h1>
+    <p class="subtitle">Your content. Totally safe. We promise.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Analytics</h3><p>Track everything</p></div>
+    <div class="card"><h3>Reports</h3><p>Beautiful charts</p></div>
+    <div class="card"><h3>Dashboard</h3><p>Real-time data</p></div>
+    <div class="card"><h3>Insights</h3><p>AI-powered</p></div>
+    <div class="card"><h3>Security</h3><p>Bank-grade</p></div>
+    <div class="card"><h3>Backup</h3><p>Never lose data</p></div>
+    <div class="card"><h3>API</h3><p>Full access</p></div>
+    <div class="card"><h3>Support</h3><p>24/7 help</p></div>
+  </div>
+
+  <span class="reset-link" onclick="localStorage.removeItem('theSnake_eaten'); location.reload();">
+    Reset demo (for testing)
+  </span>
+
+  <script src="../hacks/theSnake.js"></script>
+</body>
+</html>

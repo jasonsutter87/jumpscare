@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Important Business Content</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0c0c0c, #1a1a2e);
+      min-height: 100vh;
+      padding: 40px;
+      color: #fff;
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .content-area {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .section {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    h2 { color: #00ff00; margin-bottom: 15px; }
+    p { color: #aaa; line-height: 1.8; margin-bottom: 15px; }
+    button {
+      background: #00ff00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .reset-link {
+      display: block;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Enterprise Portal</h1>
+    <p style="color: #888;">Defend your content from the alien invasion!</p>
+  </div>
+
+  <div class="content-area">
+    <div class="section">
+      <h2>Q4 Revenue Report</h2>
+      <p>Revenue increased by 45% this quarter, exceeding all expectations.</p>
+      <button>Download Report</button>
+    </div>
+
+    <div class="section">
+      <h2>Team Updates</h2>
+      <p>New hires joining the engineering and marketing teams next month.</p>
+      <button>View Team</button>
+    </div>
+
+    <div class="section">
+      <h2>Product Roadmap</h2>
+      <p>Exciting features coming in the next release cycle.</p>
+      <button>See Roadmap</button>
+    </div>
+  </div>
+
+  <span class="reset-link" onclick="localStorage.removeItem('theInvaders_invaded'); location.reload();">
+    Reset demo (for testing)
+  </span>
+
+  <script src="../hacks/theInvaders.js"></script>
+</body>
+</html>

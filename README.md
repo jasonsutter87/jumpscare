@@ -1,6 +1,6 @@
 # chaos.js
 
-**27 harmless office pranks for maximum chaos.**
+**32 harmless office pranks for maximum chaos.**
 
 Drop a single `<script>` tag into any webpage and watch your coworkers question reality. Each prank triggers once per victim (uses localStorage), so refreshing won't save them.
 
@@ -18,7 +18,7 @@ Drop a single `<script>` tag into any webpage and watch your coworkers question 
 |------|-------------|------|
 | **theSans** | "You're getting hacked by theSans" jumpscare, then Comic Sans takes over everything. Forever. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/sans.html) |
 | **theCage** | All images slowly transform into Nicolas Cage. Every. Single. One. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/cage.html) |
-| **theDrift** | The cursor gets drunk. It drifts and wobbles, making clicking anything an adventure. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/drift.html) |
+| **theDrift** | Tokyo Drift mode! Drive a car around the page leaving tire marks. WASD + SPACE for handbrake. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/drift.html) |
 | **theGravity** | Newton's revenge. Page elements fall to the bottom with realistic physics. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/gravity.html) |
 | **theBlur** | Page progressively gets blurrier over 10 minutes. Includes a helpful eye test chart. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/blur.html) |
 | **theRotate** | The entire page slowly rotates. 0.1° at a time. Subtle enough to question your sanity. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/rotate.html) |
@@ -48,6 +48,16 @@ Drop a single `<script>` tag into any webpage and watch your coworkers question 
 | **the3D** | The page tilts in 3D following your mouse. Reality is now optional. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/3d.html) |
 | **theSound** | Random Windows XP-style sounds play. Beeps, boops, and chimes. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/sound.html) |
 | **theSnow** | Snowflakes fall across the screen. Frost edges appear. Winter is coming. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/snow.html) |
+
+### Game Hacks
+
+| Hack | Description | Demo |
+|------|-------------|------|
+| **theDelay** | Adds 200-800ms lag to every click. The ultimate frustration simulator. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/delay.html) |
+| **theTrail** | Fire emoji cursor trail. Leave flames everywhere you move your mouse. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/trail.html) |
+| **theSnake** | Classic snake game that eats page elements! Eat 🍎 to restore content. Arrow keys to play. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/snake.html) |
+| **theInvaders** | Space Invaders! Aliens descend to abduct your page elements. Defend with ←→ and SPACE. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/invaders.html) |
+| **thePong** | Pong ball bounces around scrambling elements. Paddle with ←→ keys. | [Demo](https://jasonsutter87.github.io/jumpscare/demos/pong.html) |
 
 ---
 
@@ -84,6 +94,11 @@ Add one of these to any page's `<head>`:
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/the3D.js"></script>
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/theSound.js"></script>
 <script src="https://jasonsutter87.github.io/jumpscare/hacks/theSnow.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/theDelay.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/theTrail.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/theSnake.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/theInvaders.js"></script>
+<script src="https://jasonsutter87.github.io/jumpscare/hacks/thePong.js"></script>
 ```
 
 Each hack:
@@ -157,7 +172,8 @@ Open browser console and run:
   'theEarthquake_shook', 'theCrash_crashed', 'theUpdate_updated', 'theColoring_colored',
   'theMatrix_unplugged', 'theNyan_nyaned', 'theUwU_uwued', 'theConfetti_partied',
   'theZoom_zoomed', 'theCursor_cursed', 'theDoge_wowed', 'theAds_advertised',
-  'the3D_tilted', 'theSound_noisy', 'theSnow_frozen'
+  'the3D_tilted', 'theSound_noisy', 'theSnow_frozen', 'theDelay_lagged',
+  'theTrail_blazed', 'theSnake_eaten', 'theInvaders_invaded', 'thePong_ponged'
 ].forEach(k => localStorage.removeItem(k));
 ```
 
@@ -185,10 +201,10 @@ const CHAOS_BASE = 'https://your-domain.com/path';
 jumpscare/
 ├── index.html          # Main landing page
 ├── README.md           # This file
-├── hacks/              # The chaos scripts (27 hacks)
+├── hacks/              # The chaos scripts (32 hacks)
 │   ├── theSans.js
 │   ├── theCage.js
-│   ├── theDrift.js
+│   ├── theDrift.js      # Tokyo Drift car game
 │   ├── theGravity.js
 │   ├── theBlur.js
 │   ├── theRotate.js
@@ -212,12 +228,17 @@ jumpscare/
 │   ├── theAds.js
 │   ├── the3D.js
 │   ├── theSound.js
-│   └── theSnow.js
+│   ├── theSnow.js
+│   ├── theDelay.js      # Click lag simulator
+│   ├── theTrail.js      # Fire cursor trail
+│   ├── theSnake.js      # Snake eats elements
+│   ├── theInvaders.js   # Space Invaders
+│   └── thePong.js       # Pong scrambles page
 ├── demos/              # Individual demo pages
 │   ├── sans.html
 │   ├── cage.html
 │   ├── drift.html
-│   └── ... (27 demo pages)
+│   └── ... (32 demo pages)
 └── lib/                # Self-hosted dependencies
     ├── clippy/         # Clippy assets (agent, sprites, sounds)
     └── cage/           # Nicolas Cage images

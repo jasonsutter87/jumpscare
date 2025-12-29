@@ -3,74 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click Speed Test</title>
+  <title>Racing Dashboard</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #1a1a2e, #16213e);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 40px;
       color: #fff;
     }
-    h1 { margin-bottom: 20px; }
-    .target-area {
+    .header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; color: #ff6b6b; }
+    .content-area {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 30px 0;
+      gap: 20px;
+      margin-bottom: 30px;
     }
-    .target {
-      width: 80px;
-      height: 80px;
-      background: #e94560;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.1s, background 0.2s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
     }
-    .target:hover {
-      transform: scale(1.1);
-      background: #ff6b6b;
+    .stat-value { font-size: 2rem; color: #ff6b6b; font-weight: bold; }
+    .stat-label { color: #888; margin-top: 5px; }
+    .info-section {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
-    .score { font-size: 2rem; margin-top: 20px; }
+    h2 { color: #ff6b6b; margin-bottom: 15px; }
+    p { color: #aaa; line-height: 1.8; }
     .reset-link {
-      position: fixed;
-      bottom: 20px;
+      display: block;
+      margin-top: 40px;
       color: #666;
       font-size: 0.8rem;
       cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Click Speed Test</h1>
-  <p>Click the targets as fast as you can!</p>
-  <div class="target-area">
-    <div class="target" onclick="score++; updateScore()">1</div>
-    <div class="target" onclick="score++; updateScore()">2</div>
-    <div class="target" onclick="score++; updateScore()">3</div>
-    <div class="target" onclick="score++; updateScore()">4</div>
-    <div class="target" onclick="score++; updateScore()">5</div>
-    <div class="target" onclick="score++; updateScore()">6</div>
-    <div class="target" onclick="score++; updateScore()">7</div>
-    <div class="target" onclick="score++; updateScore()">8</div>
-    <div class="target" onclick="score++; updateScore()">9</div>
+  <div class="header">
+    <h1>Tokyo Drift Stats</h1>
+    <p style="color: #888;">Your racing dashboard - time to hit the streets!</p>
   </div>
-  <div class="score">Score: <span id="score">0</span></div>
-  <span class="reset-link" onclick="localStorage.removeItem('theDrift_drifted'); location.reload();">Reset demo</span>
-  <script>
-    let score = 0;
-    function updateScore() {
-      document.getElementById('score').textContent = score;
-    }
-  </script>
+
+  <div class="content-area">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Total Drifts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">0 km</div>
+        <div class="stat-label">Distance</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">0 pts</div>
+        <div class="stat-label">High Score</div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Controls</h2>
+      <p>Use WASD or Arrow Keys to drive. Hold SPACE for handbrake drifting!</p>
+    </div>
+
+    <div class="info-section">
+      <h2>About</h2>
+      <p>Transform any webpage into your personal drift track. Leave tire marks everywhere you go!</p>
+    </div>
+  </div>
+
+  <span class="reset-link" onclick="localStorage.removeItem('theDrift_drifted'); location.reload();">
+    Reset demo (for testing)
+  </span>
+
   <script src="../hacks/theDrift.js"></script>
 </body>
 </html>

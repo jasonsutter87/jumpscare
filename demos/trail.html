@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normal Cursor Website</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2d3436, #636e72);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      padding: 40px 60px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+      max-width: 500px;
+    }
+    h1 { color: #333; margin-bottom: 10px; font-size: 2rem; }
+    .subtitle { color: #666; margin-bottom: 30px; }
+    .content { color: #555; line-height: 1.8; }
+    .reset-link {
+      display: block;
+      margin-top: 30px;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Boring Corporate Site</h1>
+    <p class="subtitle">Move your cursor around. Nothing exciting here.</p>
+
+    <p class="content">
+      This is a very normal website with a very normal cursor.
+      Nothing special about the mouse pointer at all.
+      Please proceed with your normal browsing activities.
+    </p>
+
+    <span class="reset-link" onclick="localStorage.removeItem('theTrail_blazed'); location.reload();">
+      Reset demo (for testing)
+    </span>
+  </div>
+
+  <script src="../hacks/theTrail.js"></script>
+</body>
+</html>
