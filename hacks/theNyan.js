@@ -1,6 +1,26 @@
 (function() {
-  if (localStorage.getItem('theNyan_nyaned')) return;
-  localStorage.setItem('theNyan_nyaned', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the nyan cat effect entirely
+    introDelay: 5000,                     // How long to wait before nyan cat appears (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theNyan_nyaned');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theNyan_nyaned', JSON.stringify({ triggered: true, timestamp: Date.now() }));
+
+  if (!CONFIG.showIntro) return;
 
   // Nyan cat pixel art as CSS
   const nyanCSS = `
@@ -138,5 +158,5 @@
       audio.volume = 0.3;
       audio.play().catch(() => {}); // Ignore if blocked
     } catch(e) {}
-  }, 5000);
+  }, CONFIG.introDelay);
 })();

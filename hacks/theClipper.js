@@ -1,6 +1,24 @@
 (function() {
-  if (localStorage.getItem('theClipper_clipped')) return;
-  localStorage.setItem('theClipper_clipped', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the intro overlay
+    introDelay: 2000,                     // How long to show intro (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theClipper_clipped');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theClipper_clipped', JSON.stringify({ triggered: true, timestamp: Date.now() }));
 
   const clippyAdvice = [
     "It looks like you're trying to work. Would you like me to distract you instead?",

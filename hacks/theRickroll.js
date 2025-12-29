@@ -1,8 +1,30 @@
 (function() {
-  if (localStorage.getItem('theRickroll_rolled')) return;
-  localStorage.setItem('theRickroll_rolled', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the intro overlay (rickroll appears after delay)
+    introDelay: 10000,                    // How long to wait before rickroll (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theRickroll_rolled');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theRickroll_rolled', JSON.stringify({ triggered: true, timestamp: Date.now() }));
 
   // No splash. Just silence. They suspect nothing.
+  if (!CONFIG.showIntro) {
+    // Skip directly - no effect for rickroll without intro
+    return;
+  }
 
   setTimeout(() => {
     // Create the rickroll overlay
@@ -74,5 +96,5 @@
       setTimeout(() => overlay.remove(), 500);
     });
 
-  }, 10000); // 10 seconds of false security
+  }, CONFIG.introDelay); // configurable delay before rickroll
 })();

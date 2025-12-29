@@ -89,7 +89,58 @@ Add one of these to any page's `<head>`:
 Each hack:
 1. Shows a dramatic jumpscare intro
 2. Applies the chaos effect
-3. Stores a flag in localStorage (only triggers once per browser)
+3. Stores a flag in localStorage (expires after 24 hours by default)
+
+---
+
+## Configuration
+
+Each hack has a `CONFIG` object at the top of the file that you can customize:
+
+```js
+const CONFIG = {
+  showIntro: true,                      // Set to false to skip the intro overlay
+  introDelay: 3000,                     // How long to show intro (in milliseconds)
+  storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+};
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `showIntro` | boolean | `true` | Show the dramatic intro overlay. Set to `false` to skip straight to the effect. |
+| `introDelay` | number | varies | How long the intro displays before the effect starts (in milliseconds). |
+| `storageDuration` | number | 24 hours | How long until the hack can trigger again for the same user. Set to `0` for every page load. |
+
+### Examples
+
+**Skip the intro entirely:**
+```js
+const CONFIG = {
+  showIntro: false,
+  introDelay: 3000,
+  storageDuration: 24 * 60 * 60 * 1000
+};
+```
+
+**Trigger on every page load (no cooldown):**
+```js
+const CONFIG = {
+  showIntro: true,
+  introDelay: 3000,
+  storageDuration: 0
+};
+```
+
+**Longer cooldown (1 week):**
+```js
+const CONFIG = {
+  showIntro: true,
+  introDelay: 3000,
+  storageDuration: 7 * 24 * 60 * 60 * 1000
+};
+```
 
 ---
 

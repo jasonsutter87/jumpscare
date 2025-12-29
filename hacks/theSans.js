@@ -1,9 +1,29 @@
 (function() {
-  // Check if victim has already been spooked
-  if (localStorage.getItem('theSans_spooked')) return;
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the intro overlay
+    introDelay: 3000,                     // How long to show intro (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
 
-  // Mark as spooked immediately
-  localStorage.setItem('theSans_spooked', 'true');
+  // Check if victim has already been spooked (with expiration)
+  const stored = localStorage.getItem('theSans_spooked');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return; // Still within cooldown period
+      }
+    } catch (e) {
+      // Legacy format or corrupted - treat as expired
+    }
+  }
+
+  // Mark as spooked with timestamp
+  localStorage.setItem('theSans_spooked', JSON.stringify({ triggered: true, timestamp: Date.now() }));
 
   // Create the overlay
   const overlay = document.createElement('div');
@@ -59,47 +79,56 @@
     <div class="hacker-name">theSans</div>
   `;
 
-  document.body.appendChild(overlay);
+  // Function to apply the actual hack effect
+  function applyEffect() {
+    // THE REAL HORROR: Comic Sans everywhere
+    const style = document.createElement('style');
+    style.id = 'theSans-comic-sans';
+    style.textContent = `
+      * {
+        font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+      }
+    `;
+    document.head.appendChild(style);
 
-  // After 3 seconds, fade out and apply Comic Sans chaos
-  setTimeout(() => {
-    overlay.style.transition = 'opacity 1s';
-    overlay.style.opacity = '0';
-
-    setTimeout(() => {
-      overlay.remove();
-
-      // THE REAL HORROR: Comic Sans everywhere
-      const style = document.createElement('style');
-      style.id = 'theSans-comic-sans';
-      style.textContent = `
-        * {
-          font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+    // Optional: small "hacked" badge in corner
+    const badge = document.createElement('div');
+    badge.innerHTML = `
+      <style>
+        #theSans-badge {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          background: #000;
+          color: #00ff00;
+          padding: 5px 10px;
+          font-size: 12px;
+          border-radius: 4px;
+          z-index: 999999;
+          font-family: 'Comic Sans MS', cursive !important;
         }
-      `;
-      document.head.appendChild(style);
+      </style>
+      <div id="theSans-badge">hacked by theSans</div>
+    `;
+    document.body.appendChild(badge);
+  }
 
-      // Optional: small "hacked" badge in corner
-      const badge = document.createElement('div');
-      badge.innerHTML = `
-        <style>
-          #theSans-badge {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: #000;
-            color: #00ff00;
-            padding: 5px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-            z-index: 999999;
-            font-family: 'Comic Sans MS', cursive !important;
-          }
-        </style>
-        <div id="theSans-badge">hacked by theSans</div>
-      `;
-      document.body.appendChild(badge);
+  // Show intro or skip directly to effect
+  if (CONFIG.showIntro) {
+    document.body.appendChild(overlay);
 
-    }, 1000);
-  }, 3000);
+    // After intro delay, fade out and apply effect
+    setTimeout(() => {
+      overlay.style.transition = 'opacity 1s';
+      overlay.style.opacity = '0';
+
+      setTimeout(() => {
+        overlay.remove();
+        applyEffect();
+      }, 1000);
+    }, CONFIG.introDelay);
+  } else {
+    // Skip intro, apply effect immediately
+    applyEffect();
+  }
 })();

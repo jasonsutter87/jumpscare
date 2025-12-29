@@ -1,6 +1,25 @@
 (function() {
-  if (localStorage.getItem('theCage_caged')) return;
-  localStorage.setItem('theCage_caged', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the intro overlay
+    introDelay: 2500,                     // How long to show intro (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  // Check if victim has already been caged (with expiration)
+  const stored = localStorage.getItem('theCage_caged');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theCage_caged', JSON.stringify({ triggered: true, timestamp: Date.now() }));
 
   // Self-hosted base URL
   const CHAOS_BASE = 'https://jasonsutter87.github.io/jumpscare';

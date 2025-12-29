@@ -1,6 +1,24 @@
 (function() {
-  if (localStorage.getItem('theRotate_rotated')) return;
-  localStorage.setItem('theRotate_rotated', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the intro overlay
+    introDelay: 2500,                     // How long to show intro (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theRotate_rotated');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theRotate_rotated', JSON.stringify({ triggered: true, timestamp: Date.now() }));
 
   const overlay = document.createElement('div');
   overlay.innerHTML = `

@@ -1,8 +1,28 @@
 (function() {
-  if (localStorage.getItem('theCrash_crashed')) return;
-  localStorage.setItem('theCrash_crashed', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the BSOD effect entirely
+    introDelay: 10000,                    // How long to wait before BSOD (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
 
-  // No warning - just straight to BSOD after 10 seconds
+  const stored = localStorage.getItem('theCrash_crashed');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theCrash_crashed', JSON.stringify({ triggered: true, timestamp: Date.now() }));
+
+  if (!CONFIG.showIntro) return;
+
+  // No warning - just straight to BSOD after delay
   setTimeout(() => {
     const bsod = document.createElement('div');
     bsod.innerHTML = `
@@ -118,5 +138,5 @@
         // Just stays at 100% forever lol
       }
     }, 500);
-  }, 10000);
+  }, CONFIG.introDelay);
 })();

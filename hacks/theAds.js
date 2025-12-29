@@ -1,6 +1,26 @@
 (function() {
-  if (localStorage.getItem('theAds_advertised')) return;
-  localStorage.setItem('theAds_advertised', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the popup ads entirely
+    introDelay: 10000,                    // How long to wait before first popup (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theAds_advertised');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theAds_advertised', JSON.stringify({ triggered: true, timestamp: Date.now() }));
+
+  if (!CONFIG.showIntro) return;
 
   const ads = [
     { title: "CONGRATULATIONS!", body: "You are the 1,000,000th visitor! Click here to claim your FREE iPad!", color: "#ff0000" },
@@ -18,13 +38,14 @@
   function createPopupAd() {
     const ad = ads[Math.floor(Math.random() * ads.length)];
     const popup = document.createElement('div');
+    const popupId = 'popup-ad-' + Date.now();
 
     const x = 50 + Math.random() * (window.innerWidth - 350);
     const y = 50 + Math.random() * (window.innerHeight - 250);
 
     popup.innerHTML = `
       <style>
-        .popup-ad-${Date.now()} {
+        .${popupId} {
           position: fixed;
           left: ${x}px;
           top: ${y}px;
@@ -36,7 +57,7 @@
           font-family: 'Arial', sans-serif;
           animation: popIn 0.3s ease;
         }
-        .popup-ad-${Date.now()} .ad-header {
+        .${popupId} .ad-header {
           background: ${ad.color};
           color: #fff;
           padding: 5px 10px;
@@ -45,7 +66,7 @@
           align-items: center;
           font-size: 12px;
         }
-        .popup-ad-${Date.now()} .ad-close {
+        .${popupId} .ad-close {
           cursor: pointer;
           font-weight: bold;
           width: 20px;
@@ -54,22 +75,22 @@
           align-items: center;
           justify-content: center;
         }
-        .popup-ad-${Date.now()} .ad-body {
+        .${popupId} .ad-body {
           padding: 15px;
           text-align: center;
         }
-        .popup-ad-${Date.now()} .ad-title {
+        .${popupId} .ad-title {
           color: ${ad.color};
           font-size: 18px;
           font-weight: bold;
           margin-bottom: 10px;
           animation: blink 0.5s infinite;
         }
-        .popup-ad-${Date.now()} .ad-text {
+        .${popupId} .ad-text {
           font-size: 14px;
           margin-bottom: 15px;
         }
-        .popup-ad-${Date.now()} .ad-button {
+        .${popupId} .ad-button {
           background: ${ad.color};
           color: #fff;
           border: none;
@@ -78,7 +99,7 @@
           cursor: pointer;
           animation: pulse 1s infinite;
         }
-        .popup-ad-${Date.now()} .ad-fake-close {
+        .${popupId} .ad-fake-close {
           position: absolute;
           top: 5px;
           right: 5px;
@@ -88,7 +109,7 @@
         @keyframes pulse { 50% { transform: scale(1.05); } }
         @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
       </style>
-      <div class="popup-ad-${Date.now()}">
+      <div class="${popupId}">
         <div class="ad-header">
           <span>&#x26A0; SPECIAL OFFER &#x26A0;</span>
           <span class="ad-close" onclick="this.parentElement.parentElement.parentElement.remove()">X</span>
@@ -107,7 +128,7 @@
     setTimeout(() => popup.remove(), 30000);
   }
 
-  // Start after 10 seconds
+  // Start after delay
   setTimeout(() => {
     createPopupAd();
 
@@ -117,5 +138,5 @@
         createPopupAd();
       }
     }, 15000 + Math.random() * 15000);
-  }, 10000);
+  }, CONFIG.introDelay);
 })();

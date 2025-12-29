@@ -1,6 +1,26 @@
 (function() {
-  if (localStorage.getItem('theUpdate_updated')) return;
-  localStorage.setItem('theUpdate_updated', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the update screen entirely
+    introDelay: 15000,                    // How long to wait before update screen (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theUpdate_updated');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theUpdate_updated', JSON.stringify({ triggered: true, timestamp: Date.now() }));
+
+  if (!CONFIG.showIntro) return;
 
   setTimeout(() => {
     const update = document.createElement('div');
@@ -61,5 +81,5 @@
         clearInterval(interval);
       }
     });
-  }, 15000);
+  }, CONFIG.introDelay);
 })();

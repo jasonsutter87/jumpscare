@@ -1,6 +1,26 @@
 (function() {
-  if (localStorage.getItem('theZoom_zoomed')) return;
-  localStorage.setItem('theZoom_zoomed', 'true');
+  // ===========================================
+  // CONFIGURATION OPTIONS
+  // ===========================================
+  const CONFIG = {
+    showIntro: true,                      // Set to false to skip the zoom effect entirely
+    introDelay: 5000,                     // How long to wait before zoom starts (in milliseconds)
+    storageDuration: 24 * 60 * 60 * 1000  // How long before hack can trigger again (default: 24 hours)
+  };
+  // ===========================================
+
+  const stored = localStorage.getItem('theZoom_zoomed');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      if (data.timestamp && (Date.now() - data.timestamp) < CONFIG.storageDuration) {
+        return;
+      }
+    } catch (e) {}
+  }
+  localStorage.setItem('theZoom_zoomed', JSON.stringify({ triggered: true, timestamp: Date.now() }));
+
+  if (!CONFIG.showIntro) return;
 
   // No splash - subtle chaos
   let zoom = 100;
@@ -55,8 +75,8 @@
     requestAnimationFrame(updateZoom);
   }
 
-  // Start zooming after 5 seconds
+  // Start zooming after delay
   setTimeout(() => {
     updateZoom();
-  }, 5000);
+  }, CONFIG.introDelay);
 })();
